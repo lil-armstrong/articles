@@ -10,11 +10,15 @@ It can be very frustrating to try resolving the modules in each individual files
 
 In this tutorial, I will be using the alias ``@`` as a reference to the root of the project.
 In order to follow this tutorial, you need to scaffold a react project using vite. Although I am using react to demonstrate this, you can do the same for other frintend frameworks like Vue and AngularJS as long as Typescript is supported.
-> [Click here](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to learn how to scaffold a new vite app.
+> [Click here](https://vitejs.dev/guide/#scaffolding-your-first-vite-project) to learn how to scaffold a new vite app or enter the following command
+```bash
+yarn create vite
+```
+Follow the prompts to complete the vite app setup
 Follow the following steps to set a path alias for both typescript and Vite
 
 ## Steps to take
-1. In your project directory, open ``tsconfig.json`` file and add the following entries to the ``compilerOptions`` key. Usually your project root has a src folder where all the source codes exist at. Set that as teh base url.
+1. In your project directory, open ``tsconfig.json`` file and add the following entries to the ``compilerOptions`` key. Usually your project root has a src folder where all the source codes exist at. Set that as the base url.
 ```js
 {
 	"compilerOptions": {
