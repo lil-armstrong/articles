@@ -1,4 +1,5 @@
 # Linux Terminal tricks
+
 For bash tutorial, use this [link](https://www.thegeekstuff.com/tag/bash-tutorial/)
 
 ## How to create file with a numberic prefix within a range and fixed suffix using touch and sed
@@ -8,14 +9,15 @@ seq 10 28 | sed -En "s/(.*)/\1-answer.txt/p" | xargs -t touch
 ```
 
 ## Bash Positional parameters
+
 A parameter is an entity that stores values. It can be a name, a number or some special characters. A variable is a parameter denoted by a name.
 
 Bash provides two kind of parameters.
 
-- Positional Parameter
-- Special Parameter
+-   Positional Parameter
+-   Special Parameter
 
-> Positional parameters  are the arguments given to your scripts when it is invoked. It could be from `$1` to `$N`. When N consists of more than a single digit, it must be enclosed in a braces like `${N}`.
+> Positional parameters are the arguments given to your scripts when it is invoked. It could be from `$1` to `$N`. When N consists of more than a single digit, it must be enclosed in a braces like `${N}`.
 
 ```bash
 #!/usr/bin/env bash
@@ -30,6 +32,7 @@ let sub=$1-$2
 > Shell builtin ‘let’ allows arithmetic operation to be performed on shell variables.
 
 ### How to Set / Unset Bash Positional Parameters
+
 The built in set command is used to set and unset the positional parameter.
 
 ```bash
@@ -53,40 +56,40 @@ The following are bash shell special parameters:
 
 You can use bash shell special parameter `$?`
 
-- To access the whole list of positional parameters, the two special parameters `$*` and `$@` are available.
-	> Outside of double quotes, these two are equivalent: Both expand to the list of positional parameters starting with `$1` (separated by spaces).
+-   To access the whole list of positional parameters, the two special parameters `$*` and `$@` are available.
 
-	> Within double quotes, however, they differ: `$*` within a pair of double quotes is equivalent to the list of positional parameters, separated by the first character of `IFS` “$1c$2c$3…”.
+    > Outside of double quotes, these two are equivalent: Both expand to the list of positional parameters starting with `$1` (separated by spaces).
 
-	```bash
-	# Printing the data available in $*
-	echo "Values of \"\$*\":"
-	for arg in "$*"
-	do
-	  echo "Arg #$cnt= $arg"
-	  let "cnt+=1"
-	done
-	```
+    > Within double quotes, however, they differ: `$*` within a pair of double quotes is equivalent to the list of positional parameters, separated by the first character of `IFS` “$1c$2c$3…”.
 
-	```bash
-	# Printing the data available in $@
-	echo "Values of \"\$@\":"
-	for arg in "$@"
-	do
-	  echo "Arg #$cnt= $arg"
-	  let "cnt+=1"
-	done
-	```
+    ```bash
+    # Printing the data available in $*
+    echo "Values of \"\$*\":"
+    for arg in "$*"
+    do
+      echo "Arg #$cnt= $arg"
+      let "cnt+=1"
+    done
+    ```
 
-	`$@` within a pair of double quotes is equivalent to the list of positional parameters, separated by unquoted spaces, i.e., “$1” “$2″..”$N”.
-- `$#` is the special parameter in bash which gives you the number of positional parameter in decimal.
-- The special parameter $$ will give the process ID of the shell. $! gives you the process id of the most recently executed background process.
+    ```bash
+    # Printing the data available in $@
+    echo "Values of \"\$@\":"
+    for arg in "$@"
+    do
+      echo "Arg #$cnt= $arg"
+      let "cnt+=1"
+    done
+    ```
 
-- `$?` Gives the exit status of the most recently executed command.
-- `$-` Options set using set builtin command
-- `$_` Gives the last argument to the previous command. At the shell startup, it gives the absolute filename of the shell script being executed.
+    `$@` within a pair of double quotes is equivalent to the list of positional parameters, separated by unquoted spaces, i.e., “$1” “$2″..”$N”.
 
+-   `$#` is the special parameter in bash which gives you the number of positional parameter in decimal.
+-   The special parameter $$ will give the process ID of the shell. $! gives you the process id of the most recently executed background process.
 
+-   `$?` Gives the exit status of the most recently executed command.
+-   `$-` Options set using set builtin command
+-   `$_` Gives the last argument to the previous command. At the shell startup, it gives the absolute filename of the shell script being executed.
 
 ## Information about PIDs in Unix systems
 
@@ -101,37 +104,44 @@ ls /proc | less
 ```
 
 > There is a numbered directory in `/proc` corresponding to each PID currently on the system. Each of the directories contains several standard files containing information about the process. For example, the file `cmdline` contains the name of the command (along with any options and arguments) that the process was started with, and it can be easily read with the `cat` or `head` command.
+
 ```bash
 cat /proc/1/cmdline
 ```
 
 > More extensive information can be found about any PID and the process it represents by reading the PID's status file, which is also found in its directory in `/proc`. For example, the following would display the contents of the `status` file for PID 1:
+
 ```bash
 cat /proc/1/status
 ```
-
 
 ## Linux process management
 
 A process in Linux can go through different states after it’s created and before it’s terminated. These states are:
 
-- Running
-A process in running state means that it is running or it’s ready to run.
+-   Running
+    A process in running state means that it is running or it’s ready to run.
 -   Sleeping
-  The process is in a sleeping state when it is waiting for a resource to be available.
-    - Interruptible sleep: A process in Interruptible sleep will wakeup to handle signals
-    - Uninterruptible sleep: a process in Uninterruptible sleep will not wake to handle signals
+    The process is in a sleeping state when it is waiting for a resource to be available.
 
-- Stopped
-A process enters a stopped state when it receives a stop signal.
-- Zombie
-Zombie state is when a process is dead but the entry for the process is still present in the table.
+    -   Interruptible sleep: A process in Interruptible sleep will wakeup to handle signals
+    -   Uninterruptible sleep: a process in Uninterruptible sleep will not wake to handle signals
 
-
-
-
-    A process in Interruptible sleep will wakeup to handle signals, whereas a process in Uninterruptible sleep will not.
-
+-   Stopped
     A process enters a stopped state when it receives a stop signal.
+-   Zombie
+    Zombie state is when a process is dead but the entry for the process is still present in the table.
 
-    Zombie state is when a process is dead but the entry for the process is still present in the table
+        A process in Interruptible sleep will wakeup to handle signals, whereas a process in Uninterruptible sleep will not.
+
+        A process enters a stopped state when it receives a stop signal.
+
+        Zombie state is when a process is dead but the entry for the process is still present in the table
+
+## Rename file extension
+
+Here's an example of a linux terminal command to rename all `.js` extensions to `.tsx` extensions
+
+```console
+find ./src/container -type f -name "*.js" -exec sh -c 'for file; do echo "Renaming $file"; mv "$file" "${file%.js}.tsx"; done' sh {} +
+```
